@@ -1,4 +1,4 @@
-package beer_cmd
+package cmd
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ var beers = map[string]string{
 	"3": "Belgian Moon",
 }
 
-const idFlag = "id"
+const idBeerFlag = "id"
 
 // InitBeersCmd initialize beers command
 func InitBeersCmd() *cobra.Command {
@@ -25,14 +25,14 @@ func InitBeersCmd() *cobra.Command {
 		Run:   runBeersFn(),
 	}
 
-	beersCmd.Flags().StringP(idFlag, "i", "", "id of the beer")
+	beersCmd.Flags().StringP(idBeerFlag, "i", "", "id of the beer")
 
 	return beersCmd
 }
 
 func runBeersFn() CobraFn {
 	return func(cmd *cobra.Command, args []string) {
-		id, _ := cmd.Flags().GetString(idFlag)
+		id, _ := cmd.Flags().GetString(idBeerFlag)
 
 		if id != "" {
 			fmt.Println(beers[id])
